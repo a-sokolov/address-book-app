@@ -1,0 +1,203 @@
+https://hackernoon.com/how-to-build-a-react-project-from-scratch-using-webpack-4-and-babel-56d4a26afd32
+
+# installing Node.js
+
+# make folder structure
+mkdir react-boilerplate
+cd react-boilerplate
+mkdir -p src/components src/styles
+
+# initialize the project. Key -y skip all questions. This whill create a package.json file)
+npm init
+
+# installing Webpack
+npm install webpack webpack-cli --save-dev
+
+We installed webpack-cli so that we can use webpack in the command line.
+
+# installing React
+npm install react react-dom --save
+
+# installing Bebel
+npm install @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+
+babel-core: Transforms ES6 code to ES5
+babel-loader: Webpack helper to transpile code, given the the preset.
+babel-preset-env: Preset which helps babel to convert ES6, ES7 and ES8 code to ES5.
+babel-preset-react: Preset which Transforms JSX to JavaScript.
+
+# index.js
+Create an index.js file inside root of the /src folder, for now add the following line code inside it.This file will be the entry point to our app.
+
+console.log("hello");
+
+# index.html
+Create an index.html file inside root of the /src folder and add following code inside it.
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Boilerplate</title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+</body>
+
+</html>
+
+# Entry and Output file
+Create a webpack.config.js in the root directory of the project so that we can define rules for our loaders.
+
+Define the entry point and output directory of our app inside the webpack.config.js
+
+const path = require("path");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "index_bundle.js"
+  }
+};
+
+In the above code, Webpack will bundle all of our JavaScript files into index-bundle.js file inside the /dist directory.
+
+# Webpack Loaders
+Now add some loaders inside this file, which will be responsible for loading and bundling the source files.
+
+Inside the webpack.config.js, add following lines of code:
+
+const path = require("path");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "index_bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  }
+};
+
+Here babel-loader is used to load our JSX/JavaScript files and css-loader is used to load and bundle all of the CSS files into one file and style-loader will add all of the styles inside the style tag of the document.
+
+Before Webpack can use css-loader and style-loader we have to install them as a dev-dependency.
+
+npm install css-loader style-loader --save-dev
+
+Keep in mind that webpack executes the loaders from last to first i.e from right to left.
+
+# .babelrc
+Now create a .babelrc file inside root of the project directory with the following contents inside of it.
+
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+
+This file will tell babel which presets to use for transpiling the code. Here we are using two presets:
+
+env: This preset is used to transpile the ES6/ES7/ES8 code to ES5.
+react: This preset is used to transpile JSX code to ES5.
+
+# Compiling files using Webpack
+Add the following lines of code inside the script object of the package.json file as below:
+
+"start": "webpack --mode development --watch",
+"build": "webpack --mode production"
+
+Now you can compile the project using below command:
+
+npm start
+
+After executing the above command you will see index_bundle.js file created under the /dist directory which will contain transpiled ES5 code from index.js file.
+
+# App.js
+Create an App.js file inside the components folder of the src folder with the following contents inside of it.
+
+import React, { Component } from "react";
+
+import '../styles/App.css';
+
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <h1>My React App!</h1>
+            </div>
+        );
+    }
+}
+
+export default App;
+
+# App.css
+Create an App.css file inside the styles folder of the src folder with the following contents inside of it.
+
+h1 {
+    color: #27aedb;
+    text-align: center;
+}
+
+Now modify the index.js file that we created earlier to contain following lines of code.
+
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App.js";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+# Installing Html-webpack-plugin
+Now we also need to install html-webpack-plugin, this plugin generates an HTML file, injects the script inside the HTML file and writes this file to dist/index.html.
+
+npm install html-webpack-plugin --save-dev
+
+Now we need to configure this plugin inside the webpack.config.js file, add the following lines of code inside it.
+
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html"
+    })
+  ]
+  
+Here the value of template key is the file index.html that we created earlier and it uses this file as a template and generates new file named index.html inside the /dist folder with the script injected.
+
+The setup is almost complete, all we have to do is to compile the source files using webpack, you can run the project using below command:
+
+npm start
+
+You will get output inside the /dist folder of project, Now open the index.html in a web browser, you will see the text “My React App!” inside of it.
+
+# Installing Webpack-dev-server
+
+npm install webpack-dev-server --save-dev
+
+And change the package.json start script like below:
+
+"start": "webpack-dev-server --mode development --open --hot"
+
+I have added two flags --open and --hot which opens and refreshes the web page whenever any change is made to components.
+Now run the below command in the terminal:
+
+npm start
