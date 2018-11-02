@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import PhoneNumberList from './PhoneNumberList.js'
-//import Checkbox from '@jetbrains/ring-ui/components/checkbox/checkbox';
+import Checkbox from '@jetbrains/ring-ui/components/checkbox/checkbox';
 
 export default class Person extends PureComponent {
     state = {
@@ -48,7 +48,7 @@ export default class Person extends PureComponent {
                                 className="btn btn-primary btn-lg float-right">
                             {isVisible ? 'hide phone numbers' : 'show phone numbers'}
                         </button>
-                        {/*<Checkbox defaultChecked>Make some coffee</Checkbox>*/}
+                        <Checkbox defaultChecked>Make some coffee</Checkbox>
                     </h2>
                 </div>
                 <div className="card-body">

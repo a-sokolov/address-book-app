@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import Person from '../Person.js'
 import './style.css'
 
-
 export default class PersonList extends Component {
     state = {
         openPersonId: null
