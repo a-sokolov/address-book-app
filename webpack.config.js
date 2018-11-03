@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const {join, resolve} = require('path');
 const pkgConfig = require('./package.json').config;
@@ -12,6 +13,7 @@ module.exports = {
     entry: `${componentsPath}/index.js`,
     output: {
         path: resolve(__dirname, pkgConfig.dist),
+        // publicPath: 'dist',
         filename: "index_bundle.js"
     },
     module: {
@@ -58,7 +60,11 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
-        })
+            template: "./src/index.html"/*,
+            favicon: "./src/images/favicon.ico"*/
+        }),
+        new CopyWebpackPlugin([{
+            from: "./src/images/favicon.ico"
+        }])
     ]
 };
