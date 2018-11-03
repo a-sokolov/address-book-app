@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import PhoneNumberList from './PhoneNumberList.js'
 import Checkbox from '@jetbrains/ring-ui/components/checkbox/checkbox';
+import Button from '@jetbrains/ring-ui/components/button/button';
 
 export default class Person extends PureComponent {
     state = {
@@ -44,10 +45,9 @@ export default class Person extends PureComponent {
                 <div className="card-header">
                     <h2 onClick={this.handleHeaderClick}>
                         {person.firstName} {person.lastName} {this.state.count}
-                        <button onClick={onButtonClick}
-                                className="btn btn-primary btn-lg float-right">
+                        <Button onClick={onButtonClick} primary theme={Button.Theme.LIGHT}>
                             {isVisible ? 'hide phone numbers' : 'show phone numbers'}
-                        </button>
+                        </Button>
                         <Checkbox defaultChecked>Make some coffee</Checkbox>
                     </h2>
                 </div>

@@ -9,7 +9,7 @@ const ringConfig = require('@jetbrains/ring-ui/webpack.config').config;
 const componentsPath = join(__dirname, pkgConfig.components);
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: `${componentsPath}/index.js`,
     output: {
         path: resolve(__dirname, pkgConfig.dist),
         filename: "index_bundle.js"
@@ -58,7 +58,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./public/index.html"
+            template: "./src/index.html"
         })
     ]
 };

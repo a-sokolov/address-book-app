@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import PersonList from './PersonList'
-import persons from '../dao/AddressBookDAO.js'
+import PersonList from './PersonList/index'
+import persons from './dao/AddressBookDAO.js'
 import 'bootstrap/dist/css/bootstrap.css'
 
 export default class AddressBook extends Component {
