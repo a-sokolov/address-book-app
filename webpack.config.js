@@ -10,7 +10,15 @@ const ringConfig = require('@jetbrains/ring-ui/webpack.config').config;
 const componentsPath = join(__dirname, pkgConfig.components);
 
 module.exports = {
-    entry: `${componentsPath}/index.js`,
+    entry: `${componentsPath}/app.js`,
+    resolve: {
+        mainFields: ['module', 'browser', 'main'],
+        alias: {
+            react: resolve('./node_modules/react'),
+            'react-dom': resolve('./node_modules/react-dom'),
+            '@jetbrains/ring-ui': resolve('./node_modules/@jetbrains/ring-ui')
+        }
+    },
     output: {
         path: resolve(__dirname, pkgConfig.dist),
         // publicPath: 'dist',
@@ -56,6 +64,13 @@ module.exports = {
                     loader: "babel-loader?cacheDirectory"
                 },
             },
+            {
+                test: /\.(gif|svg|jpg|png)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "file-loader"
+                }
+            }
         ]
     },
     plugins: [

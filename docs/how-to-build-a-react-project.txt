@@ -26,8 +26,8 @@ babel-loader: Webpack helper to transpile code, given the the preset.
 babel-preset-env: Preset which helps babel to convert ES6, ES7 and ES8 code to ES5.
 babel-preset-react: Preset which Transforms JSX to JavaScript.
 
-# index.js
-Create an index.js file inside root of the /src folder, for now add the following line code inside it.This file will be the entry point to our app.
+# app.js
+Create an app.js file inside root of the /src folder, for now add the following line code inside it.This file will be the entry point to our app.
 
 console.log("hello");
 
@@ -60,7 +60,7 @@ Define the entry point and output directory of our app inside the webpack.config
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/app.js",
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index_bundle.js"
@@ -77,7 +77,7 @@ Inside the webpack.config.js, add following lines of code:
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/app.js",
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index_bundle.js"
@@ -129,42 +129,42 @@ Now you can compile the project using below command:
 
 npm start
 
-After executing the above command you will see index_bundle.js file created under the /dist directory which will contain transpiled ES5 code from index.js file.
+After executing the above command you will see index_bundle.js file created under the /dist directory which will contain transpiled ES5 code from app.js file.
 
-# App.js
-Create an App.js file inside the components folder of the src folder with the following contents inside of it.
+# AppRoot.jst.js
+Create an AppRoot.jst.js file inside the components folder of the src folder with the following contents inside of it.
 
 import React, { Component } from "react";
 
-import '../styles/App.css';
+import '../styles/AppRoot.css';
 
-class App extends Component {
+class AppRoot extends Component {
     render() {
         return (
             <div>
-                <h1>My React App!</h1>
+                <h1>My React AppRoot!</h1>
             </div>
         );
     }
 }
 
-export default App;
+export default AppRoot;
 
-# App.css
-Create an App.css file inside the styles folder of the src folder with the following contents inside of it.
+# AppRoot.css
+Create an AppRoot.css file inside the styles folder of the src folder with the following contents inside of it.
 
 h1 {
     color: #27aedb;
     text-align: center;
 }
 
-Now modify the index.js file that we created earlier to contain following lines of code.
+Now modify the app.js file that we created earlier to contain following lines of code.
 
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App.js";
+import AppRoot from "./components/AppRootRoot.js";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<AppRoot />, document.getElementById("root"));
 
 # Installing Html-webpack-plugin
 Now we also need to install html-webpack-plugin, this plugin generates an HTML file, injects the script inside the HTML file and writes this file to dist/index.html.
@@ -187,7 +187,7 @@ The setup is almost complete, all we have to do is to compile the source files u
 
 npm start
 
-You will get output inside the /dist folder of project, Now open the index.html in a web browser, you will see the text “My React App!” inside of it.
+You will get output inside the /dist folder of project, Now open the index.html in a web browser, you will see the text “My React AppRoot!” inside of it.
 
 # Installing Webpack-dev-server
 
