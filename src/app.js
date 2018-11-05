@@ -1,10 +1,10 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import RedBox from 'redbox-react';
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import AppRoot from './app-root.js'
-import styles from './app.css';
+import "antd/dist/antd.css";
 
 const appEl = document.querySelector('.testAntDFramework');
 const rootEl = document.createElement('div');
