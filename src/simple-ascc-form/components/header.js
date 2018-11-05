@@ -13,8 +13,8 @@ import DatePicker from '@jetbrains/ring-ui/components/date-picker/date-picker';
 import Text from '@jetbrains/ring-ui/components/text/text';
 import Group from '@jetbrains/ring-ui/components/group/group';
 
-import {UserIcon} from '@jetbrains/ring-ui/components/icon';
-import hubLogo from '../../images/hub.svg';
+import {UserIcon, ArtifactsIcon} from '@jetbrains/ring-ui/components/icon';
+// import hubLogo from '../../images/hub.svg';
 import {Link} from "react-router-dom";
 
 export default class AppHeader extends Component {
@@ -29,10 +29,14 @@ export default class AppHeader extends Component {
             <div>
                 <Header>
                     <a href="/">
-                        <Logo
+                        <ArtifactsIcon
+                            className="ring-ico"
+                            size={UserIcon.Size.Size32}
+                        />
+                        {/*<Logo
                             glyph={hubLogo}
                             size={Logo.Size.Size48}
-                        />
+                        />*/}
                     </a>
                     <Link to="/operkassa">Оперкасса</Link>
                     <Link to="/kassa_perescheta">Касса пересчета</Link>
@@ -53,10 +57,10 @@ export default class AppHeader extends Component {
                         {/*<SmartProfile/>*/}
                         <UserIcon
                             className="ring-ico"
-                            size={UserIcon.Size.Size32}
+                            size={UserIcon.Size.Size18}
                         />
                         <Group>
-                            <Link to="/currentUser">Соколов А.В.</Link>
+                            <Link to="/current_user">Соколов А.В.</Link>
                             <Text info>Опер.день</Text>
                             <DatePicker
                                 date={this.state.date}

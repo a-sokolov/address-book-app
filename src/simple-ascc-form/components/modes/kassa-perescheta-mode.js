@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 export default class KassaPerescheta extends Component {
     render() {
         return (
-            <div>KassaPerescheta content</div>
+            <div>
+                <h4>КАССА ПЕРЕСЧЕТА</h4>
+            </div>
         )
     }
 }

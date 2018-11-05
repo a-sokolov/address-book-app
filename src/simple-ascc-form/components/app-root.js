@@ -4,7 +4,7 @@ import AppHeader from './header.js';
 import AppFooter from './footer.js';
 
 import Home from './modes/home-mode.js';
-import Operkassa from './modes/operkassa-mode.js';
+import Operkassa from './modes/operkassa/operkassa-mode.js';
 import KassaPerescheta from './modes/kassa-perescheta-mode.js';
 import BuhDocuments from './modes/buh-documents-mode.js';
 import Ledger from './modes/ledger-mode.js';
@@ -23,7 +23,7 @@ const Main = () => (
             <Route path='/ledger' component={Ledger}/>
         </Switch>
     </main>
-)
+);
 
 export default class AppRoot extends Component {
     componentDidMount() {
