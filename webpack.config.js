@@ -1,10 +1,15 @@
-const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+const {join, resolve} = require('path');
+
+const pkgConfig = require('./package.json').config;
+const componentsPath = join(__dirname, pkgConfig.components);
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: `${componentsPath}/app.js`,
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: resolve(__dirname, pkgConfig.dist),
         filename: "index_bundle.js"
     },
     module: {
@@ -19,12 +24,22 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(gif|svg|jpg|png|ico)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "file-loader"
+                }
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./public/index.html"
-        })
+            template: "./src/index.html"
+        }),
+        new CopyWebpackPlugin([{
+            from: "./src/images/favicon.ico"
+        }])
     ]
 };
