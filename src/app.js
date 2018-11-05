@@ -1,19 +1,18 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import RedBox from 'redbox-react';
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import AppRoot from './app-root.js'
-import styles from './app.css';
+import './app.css';
 
-const appEl = document.querySelector('.testAntDFramework');
+const appEl = document.querySelector('.ApplicationBody');
 const rootEl = document.createElement('div');
 
 let renderApp = () => {
-    render(
-        (<BrowserRouter>
-            <AppRoot/>
-        </BrowserRouter>),
+    render(<BrowserRouter>
+                <AppRoot/>
+           </BrowserRouter>,
         rootEl
     );
 };

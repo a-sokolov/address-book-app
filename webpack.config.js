@@ -10,6 +10,7 @@ module.exports = {
     entry: `${componentsPath}/app.js`,
     output: {
         path: resolve(__dirname, pkgConfig.dist),
+        publicPath: '/',
         filename: "index_bundle.js"
     },
     module: {

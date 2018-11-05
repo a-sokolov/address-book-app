@@ -7,7 +7,7 @@
     "dist": "./dist"
   },
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development --hot --port 9045",
+    "start": "webpack-dev-server --config ./webpack.config.js --history-api-fallback --mode development --hot --port 9045",
     "build": "webpack --mode production"
   },
   "author": "a.sokolov",
