@@ -1,29 +1,67 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon, Avatar } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 
 const { Header } = Layout;
 
+import { Drawer, Divider } from 'antd';
+const pStyle = {
+    fontSize: 16,
+    color: 'rgba(0,0,0,0.85)',
+    lineHeight: '24px',
+    display: 'block',
+    marginBottom: 16,
+};
+
 export default class AppHeader extends Component{
+    state = { visible: false };
+
+    showDrawer = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    onClose = () => {
+        this.setState({
+            visible: false,
+        });
+    };
+
     render() {
         return (
-            <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }} className="header">
-                <Menu onClick={this.handleClick}
-                      theme="dark"
-                      mode="horizontal"
-                      style={{ lineHeight: '64px' }}>
-                    <Menu.Item key="home">
-                        <Icon type="home" />
-                    </Menu.Item>
-                    <Menu.Item key="operkassa">Оперкасса</Menu.Item>
-                    <Menu.Item key="kassa_pereschta">Касса пересчета</Menu.Item>
-                    <Menu.Item key="buh_documnts">Бухгалтерские документы</Menu.Item>
-                    <Menu.Item key="card_index">Картотеки</Menu.Item>
-                    <Menu.Item key="user">
-                        <Icon type="user" />
-                        Соколов А.В.
-                    </Menu.Item>
-                </Menu>
-             </Header>
+            <div>
+                <Header className="header">
+                    <Menu onClick={this.handleClick}
+                          theme="dark"
+                          defaultSelectedKeys={['operkassa']}
+                          mode="horizontal"
+                          style={{ lineHeight: '64px' }}>
+                        <Menu.Item key="home">
+                            <Icon type="home" />
+                        </Menu.Item>
+                        <Menu.Item key="operkassa">Оперкасса</Menu.Item>
+                        <Menu.Item key="kassa_pereschta">Касса пересчета</Menu.Item>
+                        <Menu.Item key="buh_documnts">Бухгалтерские документы</Menu.Item>
+                        <Menu.Item key="card_index">Картотеки</Menu.Item>
+                        <Menu.Item key="user" onClick={this.showDrawer}>
+                            <Icon type="user" />
+                            Соколов А.В.
+                        </Menu.Item>
+                    </Menu>
+                 </Header>
+                <Drawer
+                    width={320}
+                    placement="right"
+                    onClose={this.onClose}
+                    visible={this.state.visible}
+                    maskClosable={false}
+                    title="Данные пользователя"
+                >
+                    <p>Соколов Анатолий Викторович</p>
+                    <p>Руководитель разработки IT-направления</p>
+                    <Divider />
+                </Drawer>
+            </div>
         )
     }
 
