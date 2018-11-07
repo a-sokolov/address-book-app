@@ -1,19 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
 import RedBox from 'redbox-react';
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 
-import AppRoot from './app-root.js'
+import AppRoot from './app-root'
 import "antd/dist/antd.css";
+import history from './history';
 
 const appEl = document.querySelector('.testAntDFramework');
 const rootEl = document.createElement('div');
 
 let renderApp = () => {
     render(
-        (<BrowserRouter>
+        (<Router history={history}>
             <AppRoot/>
-        </BrowserRouter>),
+        </Router>),
         rootEl
     );
 };

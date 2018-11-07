@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
+import { Drawer, Divider } from 'antd';
+import history from '../history';
 
 const { Header } = Layout;
 
-import { Drawer, Divider } from 'antd';
 const pStyle = {
     fontSize: 16,
     color: 'rgba(0,0,0,0.85)',
@@ -27,13 +28,25 @@ export default class AppHeader extends Component{
         });
     };
 
+    toolbarMenuClick = (toolbarItem) => {
+        switch (toolbarItem.key) {
+           case 'operkassa':
+                history.push('/' + toolbarItem.key);
+                break;
+           case 'user':
+                break;
+           default:
+                history.push('/');
+        }
+    }
+
     render() {
         return (
             <div>
                 <Header className="header">
-                    <Menu onClick={this.handleClick}
+                    <Menu onClick={this.toolbarMenuClick}
                           theme="dark"
-                          defaultSelectedKeys={['operkassa']}
+                          // defaultSelectedKeys={['operkassa']}
                           mode="horizontal"
                           style={{ lineHeight: '64px' }}>
                         <Menu.Item key="home">
@@ -55,17 +68,12 @@ export default class AppHeader extends Component{
                     onClose={this.onClose}
                     visible={this.state.visible}
                     maskClosable={false}
-                    title="Данные пользователя"
-                >
+                    title="Данные пользователя">
                     <p>Соколов Анатолий Викторович</p>
                     <p>Руководитель разработки IT-направления</p>
                     <Divider />
                 </Drawer>
             </div>
         )
-    }
-
-    handleClick = (e) => {
-        console.log('click ', e);
     }
 }
