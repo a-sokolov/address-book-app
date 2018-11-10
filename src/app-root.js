@@ -1,19 +1,32 @@
 import React, { Component } from "react";
-import AppHeader from './main/header';
-import AppFooter from './main/footer';
-import Home from './main/home';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
+
+import { createStore} from 'redux';
+import rootReducer from './reducers/root';
+import { signout } from "./actions/auth/signout";
+import { authenticate } from "./actions/auth/authenticate";
+
+const store = createStore(rootReducer);
+
+window.store = store;
+window.signout = signout;
+window.authenticate = authenticate;
 
 import { Layout } from 'antd';
 const { Content } = Layout;
 
-import Operkassa from './components/modes/operkassa';
+/*import AppHeader from './components/blocks/header';
+import AppFooter from './components/blocks/footer';
+import Home from './components/blocks/home';
+
+import Operkassa from './components/ascc/root/operkassa';*/
 
 export default class AppRoot extends Component {
     render() {
         return (
             <div>
-                <Layout>
+                Fucking hello!
+                 {/*<Layout>
                     <AppHeader/>
                     <Content>
                         <Switch>
@@ -22,7 +35,7 @@ export default class AppRoot extends Component {
                         </Switch>
                     </Content>
                     <AppFooter/>
-                </Layout>
+                </Layout>*/}
             </div>
         )
     }

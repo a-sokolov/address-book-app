@@ -5,7 +5,7 @@ import { Router } from "react-router-dom";
 
 import AppRoot from './app-root'
 import "antd/dist/antd.css";
-import history from './history';
+import history from './components/history';
 
 const appEl = document.querySelector('.testAntDFramework');
 const rootEl = document.createElement('div');

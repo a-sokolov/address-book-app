@@ -50,7 +50,7 @@ export default class Operkassa extends Component {
                         </Menu.Item>
                         <Menu.Item key="accept_from_atm">
                             <Icon type="file" />
-                            <span>Прием касст от банкоматов</span>
+                            <span>Прием кассет от банкоматов</span>
                         </Menu.Item>
                     </Menu>
                 </Sider>
