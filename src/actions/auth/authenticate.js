@@ -1,3 +1,3 @@
-import { AUTHENTICATE } from "../../constants/action-types";
+import C from "../../constants/auth-constants";
 
-export const authenticate = () => ({ type: AUTHENTICATE });
+export const authenticate = () => ({ type: C.AUTHENTICATE });

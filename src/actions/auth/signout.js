@@ -1,3 +1,3 @@
-import { SIGNOUT } from "../../constants/action-types";
+import C from "../../constants/auth-constants";
 
-export const signout = () => ({ type: SIGNOUT });
+export const signout = () => ({ type: C.SIGNOUT });
