@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
     Link,
     Redirect,
     withRouter
-} from 'react-router-dom'
+} from 'react-router-dom';
+
+import { Button, Icon } from 'antd';
 
 const fakeAuth = {
     isAuthenticated: false,
@@ -19,7 +21,7 @@ const fakeAuth = {
     }
 }
 
-class Login extends React.Component {
+export class Login extends React.Component {
     state = {
         redirectToReferrer: false
     }
@@ -40,9 +42,8 @@ class Login extends React.Component {
         }
 
         return (
-            <div>
-                <p>You must log in to view the page</p>
-                <button onClick={this.login}>Log in</button>
+            <div style={{ textAlign: 'center', paddingTop: '15px' }}>
+                <p>Чтобы начать работу, вы должны <a onClick={this.login}>Авторизоваться</a>!</p>
             </div>
         )
     }
@@ -50,7 +51,7 @@ class Login extends React.Component {
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        fakeAuth.isAuthenticated === true
+        fakeAuth.isAuthenticated
             ? <Component {...props} />
             : <Redirect to={{
                 pathname: '/login',
@@ -59,16 +60,24 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )} />
 )
 
-const AuthButton = withRouter(({ history }) => (
-    fakeAuth.isAuthenticated ? (
-        <p>
-            Welcome! <button onClick={() => {
-            fakeAuth.signout(() => history.push('/'))
-        }}>Sign out</button>
-        </p>
-    ) : (
-        <p>You are not logged in.</p>
-    )
+export const AuthButton = withRouter(({ history }) => (
+    fakeAuth.isAuthenticated
+      ? (
+          <div>
+            <a href ="/user">
+              <Icon type="user"/> Соколов А.В.</a> <a onClick={() => {
+                    fakeAuth.signout(() => history.push('/'))
+                  }}><Icon type="lock"/>Выйти
+            </a>
+          </div>
+        )
+      : (
+            <a onClick={() => {
+                fakeAuth.authenticate(() => history.push('/'))
+              }}>
+              <Icon type="unlock"/>Войти
+            </a>
+        )
 ))
 
 export default PrivateRoute;

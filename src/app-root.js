@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-// import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import contextReducer from './reducers/context-reducer';
 import authenticateReducer from './reducers/auth-reducer';
 
-import { Version } from './components/context';
+//import { Version } from './components/context';
 
 /*import { signout } from "./actions/auth/signout";
 import { authenticate } from "./actions/auth/authenticate";*/
@@ -22,29 +22,35 @@ window.authenticate = authenticate;*/
 import { Layout } from 'antd';
 const { Content } = Layout;
 
-/*import AppHeader from './components/blocks/header';
+import AppHeader from './components/blocks/header';
 import AppFooter from './components/blocks/footer';
 import Home from './components/blocks/home';
+import NotFound from './not-found';
 
-import Operkassa from './components/ascc/root/operkassa';*/
+import PrivateRoute, { Login, AuthButton } from './components/auth/auth';
+
+import Operkassa from './components/ascc/root/operkassa';
 
 export default class AppRoot extends Component {
     render() {
         return (
             <Provider store={store}>
                 <div>
-                    <p>Fucking hello!</p>
-                    <Version/>
-                     {/*<Layout>
+                     <div style={{ textAlign: 'right', padding: '5px 5px 5px 5px'}}>
+                        <AuthButton/>
+                     </div>
+                     <Layout>
                         <AppHeader/>
                         <Content>
                             <Switch>
                                 <Route exact path="/" component={Home}/>
-                                <Route path="/operkassa" component={Operkassa}/>
+                                <Route exact path="/login" component={Login}/>
+                                <PrivateRoute path="/operkassa" component={Operkassa}/>
+                                <Route component={NotFound}/>
                             </Switch>
                         </Content>
                         <AppFooter/>
-                    </Layout>*/}
+                    </Layout>
                 </div>
             </Provider>
         )
